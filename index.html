@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paguyuban Magelang | guyub rukun</title>
+  <!-- Google Font + Font Awesome + AOS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f5f2e9;
+      color: #2e3b3b;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #dcd4c0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #7f9f7f;
+      border-radius: 10px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(245, 242, 233, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(127, 159, 127, 0.3);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #4f6d4f, #b38b5f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #2e3b3b;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #7f9f7f, #b38b5f);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .btn-guest {
+      background: transparent;
+      border: 1.5px solid #7f9f7f;
+      color: #2e3b3b;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-guest:hover {
+      background: #7f9f7f;
+      color: #f5f2e9;
+      box-shadow: 0 0 20px #7f9f7f80;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #4f6d4f;
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        flex-direction: column;
+        background: rgba(235, 225, 210, 0.95);
+        backdrop-filter: blur(15px);
+        width: 70%;
+        height: 100vh;
+        padding: 3rem 2rem;
+        gap: 2rem;
+        transition: 0.4s ease-in-out;
+        border-left: 1px solid #7f9f7f33;
+      }
+      .nav-links.active {
+        right: 0;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+
+    section {
+      padding: 100px 5% 80px;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, #2e3b3b, #7f6b4b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* HERO dengan parallax CANDI BOROBUDUR (fixed) */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+      background: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(0,0,0,0.2), rgba(40, 35, 25, 0.7));
+      backdrop-filter: brightness(0.85);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      color: #fff4e6;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #f5e7c8, #c7a875);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #f0e0c5;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-btn {
+      background: linear-gradient(45deg, #7f9f7f, #b38b5f);
+      border: none;
+      color: white;
+      padding: 1rem 2.8rem;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 10px 30px #4f6d4f80;
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px #4f6d4fb0;
+    }
+
+    .about {
+      background: #eae3d5;
+      border-bottom: 1px solid #cbb99c;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 2;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #3d4f4f;
+    }
+
+    .about-stats {
+      flex: 1;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat h3 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #4f6d4f, #b38b5f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: rgba(235, 225, 210, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid #cbb99c;
+      border-radius: 32px;
+      padding: 1.8rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 20px 30px -10px #3d4f4f33;
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      border-color: #7f9f7f;
+      box-shadow: 0 30px 50px -15px #4f6d4f;
+    }
+
+    .project-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #7f9f7f;
+    }
+
+    .project-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: #2e3b3b;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .tag {
+      background: #d4c6b0;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #2e3b3b;
+    }
+
+    /* GALERI dengan gambar yang dijamin tampil (Unsplash stabil) */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.3s;
+      background: #dcd0bc; /* fallback */
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-item:hover {
+      border-color: #7f9f7f;
+      box-shadow: 0 0 40px #7f9f7f;
+    }
+
+    .overlay-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .gallery-item:hover .overlay-icon {
+      opacity: 1;
+    }
+
+    /* contact */
+    .contact-container {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-form {
+      flex: 2;
+      background: rgba(235, 225, 210, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid #cbb99c;
+      border-radius: 36px;
+      padding: 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: #fffaf2;
+      border: 1px solid #cbb99c;
+      border-radius: 50px;
+      font-size: 1rem;
+      color: #2e3b3b;
+      transition: 0.2s;
+    }
+
+    textarea {
+      border-radius: 30px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #7f9f7f;
+      box-shadow: 0 0 15px #7f9f7f;
+    }
+
+    .submit-btn {
+      background: linear-gradient(90deg, #7f9f7f, #b38b5f);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+      box-shadow: 0 0 30px #7f9f7f;
+    }
+
+    .contact-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .social-links a {
+      color: #6b5840;
+      transition: 0.2s;
+    }
+
+    .social-links a:hover {
+      color: #7f9f7f;
+      transform: translateY(-5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #cbb99c;
+      color: #6b5840;
+    }
+
+    @media (max-width: 600px) {
+      .section-title { font-size: 2.2rem; }
+      .hero h1 { font-size: 3rem; }
+      .about-content { flex-direction: column; }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        background-attachment: scroll;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">ꦥꦒꦸꦪꦸꦧꦤ꧀ · Magelang</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">Tentang</a>
+      <a href="#projects">Kegiatan</a>
+      <a href="#gallery">Galeri</a>
+      <a href="#contact">Kontak</a>
+      <button class="btn-guest" onclick="alert('ꦱꦸꦒꦼꦁꦫꦮꦸꦃ : sugeng rawuh!')"><i class="fas fa-leaf" style="margin-right:8px;"></i>Warga</button>
+    </div>
+    <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+  </nav>
+
+  <!-- Hero dengan CANDI BOROBUDUR (parallax) -->
+  <section id="home" class="hero">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
+      <h1>Magelang <span>guyub</span> rukun</h1>
+      <p>Paguyuban warga Magelang · nguri-uri budaya, mbangun desa</p>
+      <button class="cta-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Deleng kegiatan <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></button>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2 class="section-title" data-aos="fade-right">/ guyub kita</h2>
+    <div class="about-content">
+      <div class="about-text" data-aos="fade-up">
+        <p>Paguyuban Magelang adalah wadah silaturahmi warga asli Magelang dan sekitarnya, baik yang tinggal di kampung halaman maupun di perantauan. Kami bersama melestarikan adat Jawa, menggelar kegiatan sosial, serta mendukung kemajuan UMKM khas Magelang—seperti getuk, tempe mendoan, dan anyaman bambu.</p>
+        <p style="margin-top: 1.5rem;">Dari lereng Sumbing sampai Candi Borobudur, semangat gotong royong terus hidup. Kabeh warga Magelang iku sedulur.</p>
+      </div>
+      <div class="about-stats" data-aos="fade-left">
+        <div class="stat">
+          <h3>500+</h3>
+          <p>warga aktif</p>
+        </div>
+        <div class="stat">
+          <h3>12</h3>
+          <p>dusun binaan</p>
+        </div>
+        <div class="stat">
+          <h3>25</h3>
+          <p>UMKM dampingan</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title" data-aos="fade-right">/ kegiatan kagem sedulur</h2>
+    <div class="projects-grid">
+      <div class="project-card" data-aos="zoom-in-up" data-aos-delay="100">
+        <div class="project-icon"><i class="fas fa-utensils"></i></div>
+        <h3>Festival Getuk</h3>
+        <p>Lomba masak getuk dan pasar jajan tradisional tiap tahun di Dusun Tlatar.</p>
+        <div class="project-tags">
+          <span class="tag">Kuliner</span>
+          <span class="tag">Tradisi</span>
+        </div>
+      </div>
+      <div class="project-card" data-aos="zoom-in-up" data-aos-delay="200">
+        <div class="project-icon"><i class="fas fa-seedling"></i></div>
+        <h3>Lumbung Pangan</h3>
+        <p>Program kebun bergilir dan lumbung padi untuk ketahanan pangan desa.</p>
+        <div class="project-tags">
+          <span class="tag">Pertanian</span>
+          <span class="tag">Gotong royong</span>
+        </div>
+      </div>
+      <div class="project-card" data-aos="zoom-in-up" data-aos-delay="300">
+        <div class="project-icon"><i class="fas fa-paint-brush"></i></div>
+        <h3>Belajar Batik & Anyam</h3>
+        <p>Pelatihan membatik dan anyaman bambu khas Magelang untuk generasi muda.</p>
+        <div class="project-tags">
+          <span class="tag">Kerajinan</span>
+          <span class="tag">Budaya</span>
+        </div>
+      </div>
+      <div class="project-card" data-aos="zoom-in-up" data-aos-delay="400">
+        <div class="project-icon"><i class="fas fa-hands-helping"></i></div>
+        <h3>Sadranan Bersih Desa</h3>
+        <p>Ritual tahunan sadranan dan kerja bakti makam leluhur.</p>
+        <div class="project-tags">
+          <span class="tag">Adat</span>
+          <span class="tag">Spiritual</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI dengan gambar-gambar representatif Magelang (semua URL stabil) -->
+  <section id="gallery">
+    <h2 class="section-title" data-aos="fade-right">/ galeri Magelang</h2>
+    <div class="gallery-grid">
+      <!-- Borobudur (ikon utama) -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="50">
+        <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&auto=format" alt="Candi Borobudur">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+      <!-- Sawah terasering -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="150">
+        <img src="https://images.unsplash.com/photo-1621849400072-f554471f45ff?w=600&auto=format" alt="Sawah terasering Magelang">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+      <!-- Batik -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="250">
+        <img src="https://images.unsplash.com/photo-1590614636423-7ed3a3ee7c0c?w=600&auto=format" alt="Pembuatan batik">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+      <!-- Pasar tradisional -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="350">
+        <img src="https://images.unsplash.com/photo-1626197031507-c1700f09c9d1?w=600&auto=format" alt="Pasar tradisional">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+      <!-- Wayang kulit -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="450">
+        <img src="https://images.unsplash.com/photo-1594015597642-1b7b1cd6af0a?w=600&auto=format" alt="Wayang kulit">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+      <!-- Getuk (makanan khas) -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="550">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format" alt="Getuk Magelang">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+      <!-- Borobudur close-up -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="650">
+        <img src="https://images.unsplash.com/photo-1604998103924-89e012e5265a?w=600&auto=format" alt="Candi Borobudur detail">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+      <!-- Pegunungan Menoreh -->
+      <div class="gallery-item" data-aos="flip-left" data-aos-delay="750">
+        <img src="https://images.unsplash.com/photo-1565966701127-3fcf93bdc637?w=600&auto=format" alt="Pegunungan Menoreh">
+        <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title" data-aos="fade-right">/ hubungi kami</h2>
+    <div class="contact-container">
+      <div class="contact-form" data-aos="fade-up" data-aos-duration="1000">
+        <form id="demoForm" onsubmit="event.preventDefault(); alert('Matur nuwun! pesan sampun kintun.');">
+          <div class="form-group">
+            <input type="text" placeholder="Jeneng (nama)" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email / WA" required>
+          </div>
+          <div class="form-group">
+            <textarea rows="5" placeholder="Pesan utawa usulan..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">kirim pesan <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
+        </form>
+      </div>
+      <div class="contact-info" data-aos="fade-left">
+        <div>
+          <h3 style="margin-bottom: 1rem;">ketemu langsung</h3>
+          <p><i class="fas fa-map-marker-alt" style="color: #7f9f7f;"></i> Sekretariat: Jl. Pemuda 22, Magelang</p>
+          <p><i class="fas fa-envelope" style="color: #7f9f7f;"></i> guyub@magelang.or.id</p>
+        </div>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div style="background: #dcd0bc; border-radius: 30px; padding: 1.5rem; border: 1px solid #7f9f7f;">
+          <p style="font-weight:600; color:#2e3b3b;">ꦏꦧꦂꦩꦒꦼꦭꦁ</p>
+          <p style="font-size:0.9rem; color:#3d4f4f;">Dapatkan info terbaru seputar kegiatan dan budaya Magelang.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Paguyuban Magelang — guyub rukun, mboten pisah</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true, offset: 80 });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
